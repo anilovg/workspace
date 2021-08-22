@@ -7,11 +7,7 @@
 }
 
 body {
-background: url("../img/fondo1.png");
-background-position: center;
-background-size: 100%;
-
-font-family: 'Roboto', sans-serif;
+  ont-family: 'Roboto', sans-serif;
 }
 
 .col-4{
@@ -23,5 +19,5 @@ font-family: 'Roboto', sans-serif;
 }
 
 img {
-max-width: 100%; height: auto;
+  max-width: 100%; height: auto;
 }
