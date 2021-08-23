@@ -1,4 +1,13 @@
-/* Función que se ejecuta una vez que se haya lanzado el evento de
-que el documento se encuentra cargado, es decir, se encuentran todos los
-elementos HTML presentes. */
-document.addEventListener("DOMContentLoaded", function (e) {});
+//funcion para validar el usuario de index.html
+
+function validarUsuario(){
+
+    let user = document.getElementById('usuario').value;
+    let pass = document.getElementById('clave').value;
+    if((user.length >=6 && user.length <=8) && (pass.length >=6 && pass.length <=8)){
+        window.location.href="./inicio.html";
+    }
+    else{
+        alert("Usuario y/o contraseña incorrectos")
+    }
+}
