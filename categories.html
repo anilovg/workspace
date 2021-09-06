@@ -16,16 +16,8 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <!--barra superior de la página-->
-    </div>
-  </nav>
+  <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
+  
   <main role="main" class="pb-5">
     <div class="text-center p-4">
       <h2>Categorías</h2>
@@ -36,13 +28,13 @@
         <div class="col text-right">
           <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
             <label class="btn btn-light active" id="sortAsc">
-              <input type="radio" name="options" autocomplete="off" checked>A-Z
+              <input type="radio" name="options" autocomplete="off" checked><i class="fas fa-sort-alpha-up-alt"></i>
             </label>
             <label class="btn btn-light" id="sortDesc">
-              <input type="radio" name="options" autocomplete="off">Z-A
+              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-alpha-down-alt"></i>
             </label>
             <label class="btn btn-light" id="sortByCount">
-              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Cant.
+              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i><strong>Cant.</strong>
             </label> <!-- label para los botones para escoger el orden en que se muestra la categoría -->
           </div>
         </div>

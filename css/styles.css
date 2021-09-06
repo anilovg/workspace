@@ -55,7 +55,7 @@ footer p {
 }
 
 .site-header a {
-  color: white;
+  color: rgb(255, 255, 255);
   transition: ease-in-out color .15s;
 }
 

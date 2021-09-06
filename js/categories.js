@@ -67,14 +67,14 @@ function showCategoriesList(){ // función para mostrar las categorías
 }
 
 function sortAndShowCategories(sortCriteria, categoriesArray){ // función para ORDENAR Y MOSTRAR las categorías
-    currentSortCriteria = sortCriteria;
+    currentSortCriteria = sortCriteria;     // se le pasa el orden de criterio al valor global
 
-    if(categoriesArray != undefined){
+    if(categoriesArray != undefined){               // si está definido se le pasa la lista a ordenar al valor global
         currentCategoriesArray = categoriesArray;
     }
 
     currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
-
+    // aquí se pasa la lista ordenada con la función sortCategories con la lista y criterio acutales
     //Muestro las categorías ordenadas
     showCategoriesList();
 }
@@ -82,10 +82,10 @@ function sortAndShowCategories(sortCriteria, categoriesArray){ // función para 
 /* Función que se ejecuta una vez que se haya lanzado el evento de
 que el documento se encuentra cargado, es decir, se encuentran todos los
 elementos HTML presentes. */
-document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(CATEGORIES_URL).then(function(resultObj){
-        if (resultObj.status === "ok"){
-            sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
+document.addEventListener("DOMContentLoaded", function(e){ // evento a realizar según el botón en el html
+    getJSONData(CATEGORIES_URL).then(function(resultObj){ // resultObj es lo que devuelve el JSONData
+        if (resultObj.status === "ok"){ // veo si el status de ese resultado es ok
+            sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data); // paso la data de ese resultado
         }
     });
 

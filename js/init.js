@@ -40,6 +40,30 @@ var getJSONData = function(url){
     });
 }
 
+window.onload = function() { // función para mostrar el usuario guardado en localStorage
+  document.getElementById('user-name').innerText = window.localStorage.getItem('username')
+};
+
+document.getElementById("menu").innerHTML += `<div class="container d-flex flex-column flex-md-row justify-content-between">
+<a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
+<a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+<a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+<a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+<a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+
+<div class="dropdown">
+  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="py-0 d-none d-md-inline-block" id="user-name"></div>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownUserButton">
+    <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+     <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="index.html">Cerrar sesión</a>
+  </div>
+</div>
+</div>
+`
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.

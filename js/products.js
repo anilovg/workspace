@@ -1,33 +1,35 @@
-const ORDER_ASC_BY_NAME = "AZ"; //para ordenar los productos de la A a la Z
-const ORDER_DESC_BY_NAME = "ZA"; // de la Z a la A
+const ORDER_ASC_BY_COST = "0-9"; // para ordenar los productos de menor a mayor precio
+const ORDER_DESC_BY_COST = "9-0"; // de mayor a menor precio
 const ORDER_BY_PROD_SOLD = "Cant."; // para ordenar por cantidad de productos vendidos
+const ORDER_BY_COST = "Precio" // para ordenar por precio
 var currentProductsArray = []; // lista de productos
 var currentSortCriteria = undefined; // criterio de orden
+var minCost = undefined;
+var maxCost = undefined; // para ordenar según mín o máx precio
 var minSold = undefined;
-var maxSold = undefined; // para ordenar según mín o máx
+var maxSold = undefined; // para ordenar por relevancia
 
-function sortProducts(criteria, array){ // función para ordenar los productos
+function sortProducts(criteria, array){ // función para ordenar los productos según el orden establecido por el botón
     let result = [];
-    if (criteria === ORDER_ASC_BY_NAME) // para ordenar según el orden establecido
+    if (criteria === ORDER_ASC_BY_COST) // para ordenar de menor a mayor costo
     {
-        result = array.sort(function(a, b) {
-            if ( a.name < b.name ){ return -1; }
-            if ( a.name > b.name ){ return 1; }
+        result = array.sort(function(a, b){
+            if ( a.cost < b.cost ){ return -1; }
+            if ( a.cost > b.cost ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_DESC_BY_NAME){
-        result = array.sort(function(a, b) {
-            if ( a.name > b.name ){ return -1; }
-            if ( a.name < b.name ){ return 1; }
+        
+    }else if (criteria === ORDER_DESC_BY_COST){ // para ordenar de mayor a menor costo
+        result = array.sort(function(a, b){
+            if ( a.cost > b.cost ){ return -1; }
+            if ( a.cost < b.cost ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_BY_PROD_SOLD){
-        result = array.sort(function(a, b) {
-            let aSold = parseInt(a.productSold);
-            let bSold = parseInt(b.productSold);
 
-            if ( aSold > bSold ){ return -1; }
-            if ( aSold < bSold ){ return 1; }
+    }else if (criteria === ORDER_BY_PROD_SOLD){ // para ordenar por productos más vendidos
+        result = array.sort(function(a, b){
+            if ( a.soldCount > b.soldCount ){ return -1; }
+            if ( a.soldCount < b.soldCount ){ return 1; }
             return 0;
         });
     }
@@ -35,16 +37,17 @@ function sortProducts(criteria, array){ // función para ordenar los productos
     return result;
 }
 
-function showProductsList(){ // función para mostrar los productos
+function showProductsList(){ // función para mostrar los productos en el HTML
 
     let htmlContentToAppend = "";
     for(let i = 0; i < currentProductsArray.length; i++){
-        let product = currentProductsArray[i]; //recorre la lista de productos
+        let product = currentProductsArray[i]; // recorre la lista de productos
 
-        if (((minSold == undefined) || (minSold != undefined && parseInt(product.soldCount) >= minSold)) &&
-            ((maxSold == undefined) || (maxSold != undefined && parseInt(product.soldCount) <= maxSold))){
-                // max o min de  productos vendidos
-            htmlContentToAppend += `
+        if (((minCost == undefined) || (minCost != undefined && parseInt(product.cost) >= minCost)) &&
+            ((maxCost == undefined) || (maxCost != undefined && parseInt(product.cost) <= maxCost))){ 
+                // max o min de precio 
+
+            htmlContentToAppend += ` 
             <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
@@ -65,75 +68,76 @@ function showProductsList(){ // función para mostrar los productos
             `
         }
 
-        document.getElementById("product-container").innerHTML = htmlContentToAppend; // contenedor para colocar el contenido en el html
-    }
+        document.getElementById("product-container").innerHTML = htmlContentToAppend;
+    } // colocando el contenido en el HTML
 }
 
 function sortAndShowProducts(sortCriteria, productsArray){ // función para ORDENAR Y MOSTRAR los productos
-    currentSortCriteria = sortCriteria;
+    currentSortCriteria = sortCriteria; // el criterio que se le da por parámetro pasa a ser el "criterio actual"
 
     if(productsArray != undefined){
-        currentProductsArray = productsArray;
+        currentProductsArray = productsArray; // si se le da por parámetro una lista, pasa a ser la lista actual a ordenar
     }
 
     currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray);
-
-    //Muestro los productos ordenadas
-    showProductsList();
+    // se usa la función sortProducts para ordenar la lista según el criterio y queda guardada 
+    // en la variable currentProductsAarray
+    
+    showProductsList(); // Muestro los productos ordenadas
 }
 
 /* Función que se ejecuta una vez que se haya lanzado el evento de
 que el documento se encuentra cargado, es decir, se encuentran todos los
 elementos HTML presentes. */
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCTS_URL).then(function(resultObj){
-        if (resultObj.status === "ok"){
-            sortAndShowProducts(ORDER_ASC_BY_NAME, resultObj.data);
+    getJSONData(PRODUCTS_URL).then(function(resultObj){ // paso la url de productos al JSON y me devuelve el resultObj
+        if (resultObj.status === "ok"){                 // si resultObj está ok procede con la funcion sortAndShowProducts
+            sortAndShowProducts(ORDER_ASC_BY_COST, resultObj.data);
         }
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowProducts(ORDER_ASC_BY_NAME);
+        sortAndShowProducts(ORDER_ASC_BY_COST);
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowProducts(ORDER_DESC_BY_NAME);
+        sortAndShowProducts(ORDER_DESC_BY_COST);
     });
 
     document.getElementById("sortBySold").addEventListener("click", function(){
         sortAndShowProducts(ORDER_BY_PROD_SOLD);
     });
 
-    document.getElementById("clearRangeFilter").addEventListener("click", function(){
-        document.getElementById("rangeFilterSoldMin").value = "";
-        document.getElementById("rangeFilterSoldMax").value = "";
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){ // Para limpiar el filtro
+        document.getElementById("rangeFilterMinCost").value = "";
+        document.getElementById("rangeFilterMaxCost").value = "";
 
-        minSold = undefined;
-        maxSold = undefined;
-
-        showProductsList();
-    });
-
-    document.getElementById("rangeFilterSold").addEventListener("click", function(){
-        /* Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-        de productos vendidos. */
-        minSold = document.getElementById("rangeFilterSoldMin").value;
-        maxSold = document.getElementById("rangeFilterSoldMax").value;
-
-        if ((minSold != undefined) && (minSold != "") && (parseInt(minSold)) >= 0){
-            minSold = parseInt(minSold);
-        }
-        else{
-            minSold = undefined;
-        }
-
-        if ((maxSold != undefined) && (maxSold != "") && (parseInt(maxSold)) >= 0){
-            maxSold = parseInt(maxSold);
-        }
-        else{
-            maxSold = undefined;
-        }
+        minCost = undefined;
+        maxCost = undefined;
 
         showProductsList();
     });
+
+    document.getElementById("rangeFilterCost").addEventListener("click", function(){
+        // Obtengo el mínimo y máximo de los intervalos para filtrar por precio.
+        minCost = document.getElementById("rangeFilterMinCost").value;
+        maxCost = document.getElementById("rangeFilterMaxCost").value;
+
+        if ((minCost != undefined) && (minCost != "") && (parseInt(minCost)) >= 0){
+            minCost = parseInt(minCost);
+        }
+        else{
+            minCost = undefined;
+        }
+
+        if ((maxCost != undefined) && (maxCost != "") && (parseInt(maxCost)) >= 0){
+            maxCost = parseInt(maxCost);
+        }
+        else{
+            maxCost = undefined;
+        }
+
+        showProductsList();
+    });
+    
 });
