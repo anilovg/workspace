@@ -136,6 +136,45 @@ a.custom-card:hover {
   text-decoration: inherit;
 }
 
+
+/* Estilo de puntación */
+
 .checked {
-  color: orange;
+  color: #239cbc;
 }
+
+.rating {
+  position: relative;
+  width: 180px;
+  background: transparent;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  gap: .3em;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.rating__result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-10px) translateX(-5px);
+  z-index: -9;
+  font: 3em Arial, Helvetica, sans-serif;
+  color: #ebebeb8e;
+  pointer-events: none;
+}
+
+.rating__star {
+  font-size: 1.3em;
+  cursor: pointer;
+  color: #239cbc;
+  transition: filter linear .3s;
+}
+
+.rating__star:hover {
+  filter: drop-shadow(1px 1px 4px #239cbc);
+}
+
+input[type = "radio"]{ display:none;}

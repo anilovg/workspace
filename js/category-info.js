@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             productCountHTML.innerHTML = category.productCount;
             productCriteriaHTML.innerHTML = category.productCriteria;
 
-            //Muestro las imagenes en forma de galería
+            // Muestro las imagenes en forma de galería
             showImagesGallery(category.images);
         }
     });
