@@ -1,10 +1,10 @@
-//funcion para validar el usuario de index.html
+// Función para validar el usuario de index.html
 
 function validarUsuario(){
 
     let user = document.getElementById('usuario').value;
     let pass = document.getElementById('clave').value;
-    window.localStorage.setItem('username', user);
+    window.localStorage.setItem('username', user); // Guardo el nombre de usuario
     if((user.length >=6 && user.length <=8) && (pass.length >=6 && pass.length <=8)){
 
         window.location.href="./inicio.html";
@@ -16,10 +16,9 @@ function validarUsuario(){
     }
 }
 
-// función para el estilo del login
+// Función para el estilo del login
 
 const inputs = document.querySelectorAll(".input");
-
 
 function addcl(){
 	let parent = this.parentNode.parentNode;
@@ -32,7 +31,6 @@ function remcl(){
 		parent.classList.remove("focus");
 	}
 }
-
 
 inputs.forEach(input => {
 	input.addEventListener("focus", addcl);

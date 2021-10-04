@@ -40,9 +40,25 @@ var getJSONData = function(url){
     });
 }
 
-window.onload = function() { // función para mostrar el usuario guardado en localStorage
-  document.getElementById('user-name').innerText = window.localStorage.getItem('username')
+window.onload = function() { // Función para mostrar el usuario guardado en localStorage
+
+    if(localStorage.getItem('username') !== null){ // Si en el LS hay un usuario lo muestra junto con el dropdown
+
+      document.getElementById('user-name').innerText = window.localStorage.getItem('username')
+
+    }
+
+    else { // Si no hay usuario registrado muestra un link para iniciar sesión que va al login
+
+      document.getElementById('iniciarSesion').innerHTML = "<a class='py-2 d-none d-md-inline-block' href='index.html'>Iniciar sesión</a>";
+
+    } 
 };
+
+function cerrarSesion(){ // Función para que me borre el username del LS una vez que cierre sesión
+  window.localStorage.removeItem('username')
+};
+
 
 document.getElementById("menu").innerHTML += `<div class="container d-flex flex-column flex-md-row justify-content-between">
 <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
@@ -50,6 +66,7 @@ document.getElementById("menu").innerHTML += `<div class="container d-flex flex-
 <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
 <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
 
+<div id="iniciarSesion">
 <div class="dropdown">
   <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <div class="py-0 d-none d-md-inline-block" id="user-name"></div>
@@ -58,8 +75,9 @@ document.getElementById("menu").innerHTML += `<div class="container d-flex flex-
     <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
     <a class="dropdown-item" href="cart.html">Mi carrito</a>
      <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="index.html">Cerrar sesión</a>
+    <a class="dropdown-item" href="index.html" onclick="cerrarSesion()">Cerrar sesión</a>
   </div>
+</div>
 </div>
 </div>
 `

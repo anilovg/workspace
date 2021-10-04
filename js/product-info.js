@@ -1,5 +1,6 @@
-var product = []; // Para la lista de productos
+var productInfo = []; // Para la lista de productos
 var comments = []; // Para la lista de comentarios
+var products = [];
 
 // Para las estrellas
 
@@ -103,36 +104,64 @@ function showComments(){ // Función para mostrar lista de comentarios
         document.getElementById('show-comment').innerHTML = htmlContentToAppend; // Para imprimir los comentarios
         document.getElementById("formulario").reset(); // Para resetear el formulario una vez enviado el comentario
     }
-}
+};
+
+function showRelatedProducts(){ // Función para mostrar los productos relacionados
+
+    let htmlContentToAppend = "";
+
+    for(i=0; i < productInfo.relatedProducts.length; i++){
+        let related = productInfo.relatedProducts[i];
+
+        htmlContentToAppend += `
+
+        <div class="col-lg-6 col-md-4 col-6">
+             <div class="d-block mb-4 h-100">
+                 <img class="img-fluid img-thumbnail" src="${products[related].imgSrc}" alt="">
+                 <p style="text-align: center"><a href="product-info.html">${products[related].name}</a></p>
+             </div>
+         </div>
+        `
+
+    document.getElementById('relatedProducts').innerHTML = htmlContentToAppend; // Muestro los productos relacionados en el HTML
+    
+    }
+};
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){ // Paso la lista con la información del producto
+    getJSONData(PRODUCTS_URL).then(function(resultObj){ // Paso lista con todos los productos para luego poder tomar los productos relacionados
         if (resultObj.status === "ok")
         {
-            product = resultObj.data;
+            products = resultObj.data;
+
+    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){ // Luego paso la lista con la información del producto
+        if (resultObj.status === "ok")
+        {
+            productInfo = resultObj.data;
 
             let productNameHTML  = document.getElementById("productName");
             let productDescriptionHTML = document.getElementById("productDescription");
             let productSouldHTML = document.getElementById("productSould");
             let productCostHTML = document.getElementById("productCost");
         
-            productNameHTML.innerHTML = product.name;
-            productDescriptionHTML.innerHTML = product.description;
-            productSouldHTML.innerHTML += "Vendidos: " + product.soldCount;
-            productCostHTML.innerHTML = product.currency + " " + product.cost + 
+            productNameHTML.innerHTML = productInfo.name;
+            productDescriptionHTML.innerHTML = productInfo.description;
+            productSouldHTML.innerHTML = "Vendidos: " + productInfo.soldCount;
+            productCostHTML.innerHTML = productInfo.currency + " " + productInfo.cost + 
             ` <button class="btn btn-outline-success"><i class="fas fa-cart-plus"></i>
             <button class="btn btn-outline-danger"><i class="fas fa-heart"></i>`; // Botones para agregar al carrito y wishlist
 
+            showRelatedProducts();
+            
             // showImagesGallery(product.images); // Muestro las imágenes
         }
     });
-});
+        }
+    });
 
-
-document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){ // Paso la lista con los comentarios precargados
         if (resultObj.status === "ok"){
             
