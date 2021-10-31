@@ -40,7 +40,7 @@ var getJSONData = function(url){
     });
 }
 
-window.onload = function() { // Función para mostrar el usuario guardado en localStorage
+window.onload = function() { // Función para mostrar los datos guardados en el LS
 
     if(localStorage.getItem('username') !== null){ // Si en el LS hay un usuario lo muestra junto con el dropdown
 
@@ -52,7 +52,18 @@ window.onload = function() { // Función para mostrar el usuario guardado en loc
 
       document.getElementById('iniciarSesion').innerHTML = "<a class='py-2 d-none d-md-inline-block' href='index.html'>Iniciar sesión</a>";
 
-    } 
+    }
+    
+    let user = JSON.parse(window.localStorage.getItem('userprofile_info')); // Para mostrar los datos del usuario en "Mi perfil"
+
+    document.getElementById('name-profile').value = user.firstname;
+    document.getElementById('lastname-profile').value = user.lastName;
+    document.getElementById('age-profile').value = user.age;
+    document.getElementById('address-profile').value = user.address;
+    document.getElementById('email-profile').value = user.email;
+    document.getElementById('number-profile').value =  user.number;
+    document.getElementById('img-profile').src = window.localStorage.getItem('img')
+
 };
 
 function cerrarSesion(){ // Función para que me borre el username del LS una vez que cierre sesión
@@ -69,7 +80,7 @@ document.getElementById("menu").innerHTML += `<div class="container d-flex flex-
 <div id="iniciarSesion">
 <div class="dropdown">
   <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <div class="py-0 d-none d-md-inline-block" id="user-name"></div>
+    <div class="py-0 d-none d-md-inline-block" value="" id="user-name"></div>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownUserButton">
     <a class="dropdown-item" href="my-profile.html">Mi perfil</a>

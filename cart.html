@@ -12,23 +12,6 @@
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
-  
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
@@ -36,6 +19,11 @@
 
 <body>
   <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
+
+  <div class="text-center p-4">
+    <h2>Mi carrito</h2>
+    <p class="lead">Verás aquí los artículos de tu carrito.</p>
+  </div>
   
   <div class="container">
     <table class="table">
@@ -45,7 +33,7 @@
             <th scope="col">Producto</th>
             <th scope="col">Precio</th>
             <th scope="col">Cantidad</th>
-            <th scope="col">Subtotal</th>
+            <th scope="col"">Subtotal</th>
           </tr>
         </thead>
         <tbody id="cart">
@@ -53,9 +41,9 @@
         </tbody>
     </table>
 
-    <!-- <h5><strong>Total</strong></h5>
-    <p id="total"></p> -->
-
+    <h5><strong>Total</strong></h5>
+    <p id="total"></p>
+ 
 </div>
 
   <script src="js/jquery-3.4.1.min.js"></script>

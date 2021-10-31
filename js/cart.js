@@ -16,9 +16,6 @@ function updateProductSub(count, unitCost, id, currency){
 // function updateTotal(){ // Función para calcular el costo total
 
 
-// };
-
-
 function showCart(){ // Función para mostrar el carrito de compras
 
     let htmlToAppend = "";

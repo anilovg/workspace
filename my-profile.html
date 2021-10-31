@@ -37,14 +37,93 @@
 <body>
   <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
 
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <main role="main" class="pb-5">
+
+    <div class="container">
+      <div class="text-center p-4">
+        <h2>Mi perfil</h2>
+        <p class="lead">Aquí podrás modificar tus datos.</p>
+      </div>
+
+    <!-- FORMULARIO -->
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 order-md-1">
+
+      <form id="profile-info">
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+          </div>
+          <input type="text" class="form-control" id="username-profile" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" value="" disabled>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <input type="text" class="form-control" id="name-profile" placeholder="Nombre" value="">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-3">
+             <input type="text" class="form-control" id="lastname-profile" placeholder="Apellido">
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="col-md-3">
+        <div class="row">
+
+          <!-- Oculto el input file y le agrego un onclick a img para poder seleccionar la imagen de perfil desde la misma -->
+          
+          <img src="" class="img-fluid rounded-circle" id="img-profile" value="" onclick="$('#myFile').click();">
+          <input type="file" name="myFile" id="myFile" style="width:200px; display:none;" onchange="previewFile()">
+
+        </div>
+      </div>
     </div>
+
+      <div class="row">
+        <div class="col-2 mb-3">
+          <input type="text" class="form-control" id="age-profile" placeholder="Edad">
+        </div>
+        <div class="col-7 mb-3">
+          <input type="text" class="form-control" id="address-profile" placeholder="Dirección">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <input type="email" class="form-control" id="email-profile" placeholder="E-mail" name="email">
+        </div>
+        <div class="col-md-3 mb-3">
+          <input type="text" class="form-control" id="number-profile" placeholder="Celular">
+        </div>
+      </div> 
+
+      <div class="row">
+        <div class="col-9">
+          <input type="password" class="form-control" id="password" placeholder="Contraseña">
+          <p class="text-secondary">Para guardar los cambios ingrese su contraseña</p>
+        </div>
+      </div>
+
+      <button type="button" onclick="setUserProfile()" id="save-profile" class="btn btn-info">Guardar cambios</button>
+
+      </form>
+
+    </div>
+
   </div>
+
+  </div>
+
+  </main>
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>

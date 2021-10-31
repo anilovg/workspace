@@ -5,6 +5,7 @@ function validarUsuario(){
     let user = document.getElementById('usuario').value;
     let pass = document.getElementById('clave').value;
     window.localStorage.setItem('username', user); // Guardo el nombre de usuario
+    window.localStorage.setItem('password', pass); // Guardo la contraseña del usuario
     if((user.length >=6 && user.length <=8) && (pass.length >=6 && pass.length <=8)){
 
         window.location.href="./inicio.html";
