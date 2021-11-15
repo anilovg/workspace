@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     var sellForm = document.getElementById("sell-info");
 
     //Se agrega una escucha en el evento 'submit' que será
-    //lanzado por el formulario cuando se seleccione 'Vender'.
+    //lanzado por el formulario cuando se seleccione 'Publicar producto'.
     sellForm.addEventListener("submit", function(e){
 
         let productNameInput = document.getElementById("productName");

@@ -1,7 +1,7 @@
 let userprofile_info = {};
 
 
-function getUserName() { // Función para mostrar el nobre de usuario guardado en LS si es que lo hay
+function getUserName() { // Función para mostrar el nombre de usuario guardado en LS si es que lo hay
 
     if(localStorage.getItem('username') !== null){ // Si en el LS hay un usuario lo muestra en el "username"
 

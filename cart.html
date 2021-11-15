@@ -20,31 +20,192 @@
 <body>
   <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
 
-  <div class="text-center p-4">
-    <h2>Mi carrito</h2>
-    <p class="lead">Verás aquí los artículos de tu carrito.</p>
-  </div>
-  
   <div class="container">
-    <table class="table">
-        <thead>
+    <div class="text-center p-4">
+      <h2>Mi carrito</h2>
+      <p class="lead">Verás aquí los artículos de tu carrito.</p>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8 order-md-1">
+
+      <table class="table table-borderless table-responsive table-hover table-center">
+        <thead class="thead-dark">
           <tr>
-            <th scope="col"></th>
-            <th scope="col">Producto</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col"">Subtotal</th>
+            <th colspan="2" style="text-align: center;" scope="col">Producto</th>
+            <th style="text-align: center;" scope="col">Precio</th>
+            <th style="text-align: center;"  scope="col">Cantidad</th>
+            <th style="text-align: center;" scope="col">Subtotal</th>
+            <th>x</th>
           </tr>
         </thead>
-        <tbody id="cart">
-            
-        </tbody>
-    </table>
+        <tbody id="cart"></tbody>
+      </table>
 
-    <h5><strong>Total</strong></h5>
-    <p id="total"></p>
- 
+      <!-- PARA SELECCIONAR TIPO DE ENVIO -->
+      <hr class="mb-4">
+        <h5 class="mb-3">Tipo de envío</h5>
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="premium" name="publicationType" type="radio" class="custom-control-input" checked=""
+                required="">
+              <label class="custom-control-label" for="premium">Premium 2 a 5 días (15%)</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="express" name="publicationType" type="radio" class="custom-control-input" required="">
+              <label class="custom-control-label" for="express">Express 5 a 8 días (7%)</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="standar" name="publicationType" type="radio" class="custom-control-input" required="">
+              <label class="custom-control-label" for="standar">Standard 12 a 15 días (5%)</label>
+            </div>
+          </div>
+
+      <form class="needs-validation" id="buy-form" novalidate>
+        <hr class="mb-4">
+          <div class="form-group">
+          <h5 class="mb-3">Dirección de envío</h5>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="direc">Calle*</label>
+                <input type="text" id="addressStreet" class="form-control" required>
+                <div class="invalid-feedback">Debes completar este campo</div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="numDirec">N° de puerta*</label>
+                <input type="text" id="addressNumber" class="form-control" required>
+                <div class="invalid-feedback">Debes completar este campo</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="esq">Esquina</label>
+                <input type="text" id="addressCorner" class="form-control" required>
+                <div class="invalid-feedback">Debes completar este campo</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-7 mb-3">
+                <label for="comment">Aclaraciones:</label>
+                <textarea class="form-control" rows="2" id="comment"></textarea>
+              </div> 
+            </div>
+          </div>  
+
+        <hr class="mb-4">
+          <h4 class="mb-3">Costos</h4>
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Subtotal</h6>
+                  <small class="text-muted">Costo unitario del producto por cantidad</small>
+                </div>
+                <span class="text-muted" id="productSub">-</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Costo de envío</h6>
+                  <small class="text-muted">Según el tipo de envío</small>
+                </div>
+                <span class="text-muted" id="sendingCost">-</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (USD)</span>
+                <strong id="totalCost">-</strong>
+              </li>
+            </ul>
+
+        <hr class="mb-4">
+          <h4 class="mb-3">Forma de pago*</h4>
+            <div class="row">
+              <div class="col mb-3">
+                <button type="button" class="btn btn-info sm" data-toggle="modal" data-target="#contidionsModal">Seleccionar</button>
+                <small class="text-muted" id="method">Seleccione un método de pago</small>
+              </div>
+            </div>
+
+        <hr class="mb-4">
+          <small class="text-muted" id="method">* Campos obligatorios</small>
+          <button class="btn btn-outline-info btn-lg float-right" type="submit">Finalizar compra</button>
+      </form>
+      </div>
+    </div>
+  </div>
+      
+
+<footer class="text-muted">
+  <div class="container">
+    <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>
+    <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+  </div>
+</footer>
+
+<div class="alert fade" role="alert" id="buyResult">
+  <span id="resultBuy"></span>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
+
+        <!-- CONTENIDO DEL MODAL -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Selecciona método de pago</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                  <!--FORMULARIO DEL MODAL -->
+                  <form class="needs-validation" novalidate>
+                    <div class="row">
+                      <div class="custom-control custom-radio">
+                        <input id="tarjRadio" name="pagoType" type="radio" class="custom-control-input" checked="">
+                        <label class="custom-control-label" for="tarjRadio">Tarjeta de crédito</label>
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                              <input type="text" id="tarjNumber" class="form-control" placeholder="Número de tarjeta" required>
+                              <div class="invalid-feedback">Debes completar este campo</div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input type="text" id="tarjCod" class="form-control" placeholder="123" required>
+                              <div class="invalid-feedback">Debes completar este campo</div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                              <input type="month" id="tarjEx" class="form-control" placeholder="(MM/AA)" required>
+                              <div class="invalid-feedback">Debes completar este campo</div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  <hr>
+                    <div class="row">
+                      <div class="custom-control custom-radio">
+                        <input id="transRadio" name="pagoType" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="transRadio">Transferencia bancaria</label>
+                          <div class="row">
+                            <div class="col-md-12 mb-3">
+                              <input type="text" class="form-control" id="accountN" placeholder="Número de cuenta" required>
+                              <div class="invalid-feedback">Debes completar este campo</div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </form>
+                <hr>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Guardar cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
