@@ -16,9 +16,9 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
-  
-  <main role="main" class="pb-5">
+  <nav id="menu"></nav>
+    
+  <div class="container">
     <div class="text-center p-4">
       <h2>Categorías</h2>
       <p class="lead">Verás aquí todas las categorías del sitio.</p>
@@ -34,7 +34,7 @@
               <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-alpha-down-alt"></i>
             </label>
             <label class="btn btn-light" id="sortByCount">
-              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i><strong>Cant.</strong>
+              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i><strong>Stock</strong>
             </label> <!-- label para los botones para escoger el orden en que se muestra la categoría -->
           </div>
         </div>
@@ -67,25 +67,19 @@
         </div>
       </div>
     </div>
-  </main>
-  <footer class="text-muted bg-light">
-    <!--footer: para el pie de página-->
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
   </div>
+  <br>
+  
+    <footer id="footer" class="text-muted bg-light"></footer>
+  
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>

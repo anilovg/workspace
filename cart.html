@@ -18,8 +18,8 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
-
+  <nav id="menu"></nav>
+  
   <div class="container">
     <div class="text-center p-4">
       <h2>Mi carrito</h2>
@@ -29,14 +29,16 @@
     <div class="row justify-content-md-center">
       <div class="col-md-8 order-md-1">
 
+        <div id="hiddenCart">
+
       <table class="table table-borderless table-responsive table-hover table-center">
-        <thead class="thead-dark">
+        <thead class="thead-style">
           <tr>
-            <th colspan="2" style="text-align: center;" scope="col">Producto</th>
-            <th style="text-align: center;" scope="col">Precio</th>
-            <th style="text-align: center;"  scope="col">Cantidad</th>
-            <th style="text-align: center;" scope="col">Subtotal</th>
-            <th>x</th>
+            <th colspan="2" style="text-align: center;">Producto</th>
+            <th style="text-align: center;">Precio</th>
+            <th style="text-align: center;">Cantidad</th>
+            <th style="text-align: center;">Subtotal</th>
+            <th style="text-align: center;"><i class="fas fa-backspace"></i></th>
           </tr>
         </thead>
         <tbody id="cart"></tbody>
@@ -61,36 +63,36 @@
             </div>
           </div>
 
-      <form class="needs-validation" id="buy-form" novalidate>
         <hr class="mb-4">
           <div class="form-group">
           <h5 class="mb-3">Dirección de envío</h5>
+          <form class="needs-validation" id="buy-info">
             <div class="row">
               <div class="col-md-4 mb-3">
-                <label for="direc">Calle*</label>
-                <input type="text" id="addressStreet" class="form-control" required>
+                <label for="addressName">Calle*</label>
+                <input type="text" class="form-control" name="addressName" id="addressName" placeholder="" value="">
                 <div class="invalid-feedback">Debes completar este campo</div>
               </div>
               <div class="col-md-3 mb-3">
-                <label for="numDirec">N° de puerta*</label>
-                <input type="text" id="addressNumber" class="form-control" required>
+                <label for="addressNumber">N° de puerta*</label>
+                <input type="text" class="form-control" name="addressNumber" id="addressNumber" placeholder="" value="">
                 <div class="invalid-feedback">Debes completar este campo</div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4 mb-3">
-                <label for="esq">Esquina</label>
-                <input type="text" id="addressCorner" class="form-control" required>
+                <label for="addressCorner">Esquina</label>
+                <input type="text" class="form-control" name="addressCorner" id="addressCorner" placeholder="" value="">
                 <div class="invalid-feedback">Debes completar este campo</div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-7 mb-3">
                 <label for="comment">Aclaraciones:</label>
-                <textarea class="form-control" rows="2" id="comment"></textarea>
-              </div> 
+                <textarea class="form-control" rows="2" name="comment" id="comment"></textarea>
+              </div>
             </div>
-          </div>  
+          </div>
 
         <hr class="mb-4">
           <h4 class="mb-3">Costos</h4>
@@ -120,7 +122,7 @@
             <div class="row">
               <div class="col mb-3">
                 <button type="button" class="btn btn-info sm" data-toggle="modal" data-target="#contidionsModal">Seleccionar</button>
-                <small class="text-muted" id="method">Seleccione un método de pago</small>
+                  <small class="text-muted">Seleccione un método de pago</small>
               </div>
             </div>
 
@@ -131,21 +133,13 @@
       </div>
     </div>
   </div>
-      
 
-<footer class="text-muted">
-  <div class="container">
-    <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>
-    <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+  <div class="alert fade" role="alert" id="buyResult">
+    <span id="buySpan"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</footer>
-
-<div class="alert fade" role="alert" id="buyResult">
-  <span id="resultBuy"></span>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 
         <!-- CONTENIDO DEL MODAL -->
         <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
@@ -153,31 +147,30 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">Selecciona método de pago</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
               </div>
               <div class="modal-body">
                 <div class="container">
                   <!--FORMULARIO DEL MODAL -->
-                  <form class="needs-validation" novalidate>
                     <div class="row">
                       <div class="custom-control custom-radio">
                         <input id="tarjRadio" name="pagoType" type="radio" class="custom-control-input" checked="">
                         <label class="custom-control-label" for="tarjRadio">Tarjeta de crédito</label>
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <input type="text" id="tarjNumber" class="form-control" placeholder="Número de tarjeta" required>
+                              <input type="text" class="form-control" id="tarjNumber" placeholder="Número de tarjeta">
                               <div class="invalid-feedback">Debes completar este campo</div>
                             </div>
                             <div class="col-md-3 mb-3">
-                              <input type="text" id="tarjCod" class="form-control" placeholder="123" required>
+                              <input type="text" class="form-control" id="tarjCod" placeholder="123">
                               <div class="invalid-feedback">Debes completar este campo</div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-6 mb-3">
-                              <input type="month" id="tarjEx" class="form-control" placeholder="(MM/AA)" required>
+                              <input class="form-control" type="month" id="expiredDate" placeholder="(MM/AA)">
                               <div class="invalid-feedback">Debes completar este campo</div>
                             </div>
                           </div>
@@ -186,26 +179,39 @@
                   <hr>
                     <div class="row">
                       <div class="custom-control custom-radio">
-                        <input id="transRadio" name="pagoType" type="radio" class="custom-control-input" required="">
+                        <input id="transRadio" name="pagoType" type="radio" class="custom-control-input">
                         <label class="custom-control-label" for="transRadio">Transferencia bancaria</label>
                           <div class="row">
                             <div class="col-md-12 mb-3">
-                              <input type="text" class="form-control" id="accountN" placeholder="Número de cuenta" required>
+                              <input type="text" class="form-control" id="accountN" placeholder="Número de cuenta">
                               <div class="invalid-feedback">Debes completar este campo</div>
                             </div>
                           </div>
                       </div>
                     </div>
-                  </form>
                 <hr>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Guardar cambios</button>
+                <button type="submit" class="btn btn-info" data-dismiss="modal">Guardar cambios</button>
               </div>
             </div>
           </div>
         </div>
+        <br>
+
+      </div>
+
+    <footer id="footer" class="text-muted bg-light"></footer>
+    
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
 
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>

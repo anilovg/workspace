@@ -16,8 +16,8 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
-  
+  <nav id="menu"></nav>
+    
   <main role="main">
     <div class="container mt-5">
       <div class="jumbotrom text-center">
@@ -95,7 +95,7 @@
         <div id="show-comment"></div>
       </div>
 
-<!-- Form para gregar nuevos comentarios -->
+<!-- Form para agregar nuevos comentarios -->
 
 <div class="col col-6">
 
@@ -109,25 +109,12 @@
       
       <div class="rating">
         <span class="rating__result"></span>
-          <i class="rating__star far fa-star" value="1"></i>
-          <i class="rating__star far fa-star" value="2"></i>
-          <i class="rating__star far fa-star" value="3"></i>
-          <i class="rating__star far fa-star" value="4"></i>
           <i class="rating__star far fa-star" value="5"></i>
+          <i class="rating__star far fa-star" value="4"></i>
+          <i class="rating__star far fa-star" value="3"></i>
+          <i class="rating__star far fa-star" value="2"></i>
+          <i class="rating__star far fa-star" value="1"></i>
       </div>
-
-      <!-- Para mostrar estrellas en comentario -->
-
-        <div class="rating">
-          <span class="rating__result"></span>
-          <select id="score" class="star-rating">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
 
           <button type="button" class="btn btn-info mb-2" onclick="saveComment()">Enviar</button>      
         
@@ -150,15 +137,10 @@
   <a type="button" class="btn btn-light btn-lg btn-block" href="categories.html">Ver categorías</a>
     </div>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
+  <br>
+ 
+  <footer id="footer" class="text-muted bg-light"></footer>
+  
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

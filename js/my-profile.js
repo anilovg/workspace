@@ -6,7 +6,6 @@ function getUserName() { // Función para mostrar el nombre de usuario guardado 
     if(localStorage.getItem('username') !== null){ // Si en el LS hay un usuario lo muestra en el "username"
 
       document.getElementById('username-profile').value = window.localStorage.getItem('username');
-
     }
 
     else { // Si no hay un usuario en el LS se muestra un link para ir a iniciar sesión
@@ -23,7 +22,7 @@ function setUserProfile(){ // Función para guardar los datos del usuario
 
     userprofile_info = {
 
-    firstname:document.getElementById('name-profile').value,
+    firstName:document.getElementById('name-profile').value,
     lastName:document.getElementById('lastname-profile').value,
     age:document.getElementById('age-profile').value,
     address:document.getElementById('address-profile').value,
@@ -37,7 +36,7 @@ function setUserProfile(){ // Función para guardar los datos del usuario
 
     window.localStorage.setItem('userprofile_info', JSON.stringify(userprofile_info));
 
-    if(userprofile_info.firstname != "" && userprofile_info.lastName != "" && userprofile_info.age != "" && userprofile_info.address != "" && userprofile_info.email != "" && userprofile_info.number != ""
+    if(userprofile_info.firstName != "" && userprofile_info.lastName != "" && userprofile_info.age != "" && userprofile_info.address != "" && userprofile_info.email != "" && userprofile_info.number != ""
         && userprofile_info.passwordValidation == window.localStorage.getItem('password')){
             // La contraseña debe ser la misma con la que inició sesión
 

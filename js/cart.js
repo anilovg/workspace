@@ -1,12 +1,12 @@
-const MULTIPLE_CART_URL = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
-    // Link del desafiante, carrito con más de un producto.
-
 let productsCart = []; // Lista con los productos del carrito
 let total = 0;
 let subtotales = document.getElementsByClassName("subtotal"); // Tomo los subtotales por la clase subtotal
 let sendingPercentage = 15; // Porcentaje según envío
 let DOLLAR_SYMBOL = "USD";
 let PERCENTAGE_SYMBOL = '%';
+// PARA VALIDACIONES
+let SUCCESS_MSG = "¡Se ha realizado la publicación con éxito! :)";
+let ERROR_MSG = "Ha habido un error :(, verifica qué pasó.";
 
 
 function updateProductSub(count, unitCost, id, currency){
@@ -38,7 +38,7 @@ function updateTotal(){ // Función para calcular el costo total
         } 
     };
 
-    document.getElementById("productSub").innerHTML = DOLLAR_SYMBOL + " " +  total;
+    document.getElementById("productSub").innerHTML = DOLLAR_SYMBOL + " " +  (total).toFixed(2);
     // Muestro el subtotal de los productos en dólares
 
     let sendingCostHTML = document.getElementById("sendingCost");
@@ -70,19 +70,24 @@ function showCart(){ // Función para mostrar el carrito de compras
         <td class="align-middle">${article.currency} ${article.unitCost}</td>
         <td class="align-middle" cantidad><input type="number" style="width: 180px" min ="1" value=${article.count} id="${i}" onchange="updateProductSub(this.value,${article.unitCost},${i},'${article.currency}')"></td></div>
         <td class="align-middle subtotal" id="subtotal${i}">${article.currency} ${article.count*article.unitCost}</td>
-        <td><i class="fas fa-trash-alt"></i></td>
+        <td><button class="btn"><i class="fas fa-trash-alt"></i></button></td>
         </tr>   
         `
-        
-        i++;
 
+        i++;
     }
 
-    document.getElementById("cart").innerHTML = htmlToAppend;
-    updateTotal();
-    
-    // document.getElementById("contArt").innerHTML = article.count;
+    if(localStorage.getItem('username') !== null){ // Si en el LS vemos que se inició sesión se muestra la página con el carrito
 
+        document.getElementById("cart").innerHTML = htmlToAppend;
+        updateTotal();
+        // document.getElementById("contArt").innerHTML = article.count;
+    }
+    
+    else { // Si no, se muestra un link para ir a iniciar sesión 
+
+        document.getElementById("hiddenCart").innerHTML = "<div class='text-center'><a href='index.html'>Debes de iniciar sesión para acceder a tu carrito</a></div>";
+    }
 };
 
 
@@ -106,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     // Eventos de costo de envío
-       document.getElementById("premium").addEventListener("change", function(){
+    document.getElementById("premium").addEventListener("change", function(){
         sendingPercentage = 15;
         updateTotal();
     });
@@ -121,41 +126,77 @@ document.addEventListener("DOMContentLoaded", function(e){
         updateTotal();
     });
 
-    // Obtengo el formulario a validar
-    var buyForm = document.getElementById("buy-form");
+    // VALIDACIONES
+        //Se obtiene el formulario de compra
+        var buyForm = document.getElementById("buy-info");
 
-    buyForm.addEventListener("submit", function(e){
+        //Se agrega una escucha en el evento 'submit' que será
+        //lanzado por el formulario cuando se seleccione 'Publicar producto'.
+        buyForm.addEventListener("submit", function(e){
+    
+            let addressName = document.getElementById("addressName");
+            let addressNumber = document.getElementById("addressNumber");
+            let addressCorner = document.getElementById("addressCorner");
+            let infoMissing = false;
+    
+            //Quito las clases que marcan como inválidos
+            addressName.classList.remove('is-invalid');
+            addressNumber.classList.remove('is-invalid');
+            addressCorner.classList.remove('is-invalid');
 
-        let addressStreet = document.getElementById("addressStreet");
-        let addressNumber = document.getElementById("addressNumber");
-        let addressCorner = document.getElementById("addressCorner");
+    
+            //Se realizan los controles necesarios,
+            //En este caso se controla que se haya ingresado el nombre y categoría.
+            //Consulto por el nombre del producto
+            if (addressName.value === "")
+            {
+                addressName.classList.add('is-invalid');
+                infoMissing = true;
+            }
+            
+            //Consulto por la categoría del producto
+            if (addressNumber.value === "")
+            {
+                addressNumber.classList.add('is-invalid');
+                infoMissing = true;
+            }
 
-        addressStreet.classList.remove('is-invalid');
-        addressNumber.classList.remove('is-invalid');
-        addressCorner.classList.remove('is-invalid');
-
-        // Se controla que se haya ingresado la dirección correctamente
-
-        // Consulto por la calle
-        if (addressStreet.value === "")
-        {
-            addressStreet.classList.add('is-invalid');
-        }
+            //Consulto por la categoría del producto
+            if (addressCorner.value === "")
+            {
+                addressCorner.classList.add('is-invalid');
+                infoMissing = true;
+            }
+            
+            if(!infoMissing)
+            {
+                //Aquí ingresa si pasó los controles, irá a enviar
+                //la solicitud para crear la publicación.
+    
+                getJSONData(CART_BUY_URL).then(function(resultObj){
+                    let msgToShowHTML = document.getElementById("buySpan");
+                    let msgToShow = "";
         
-        // Consulto por el número de puerta
-        if (addressNumber.value === "")
-        {
-            addressNumber.classList.add('is-invalid');
-        }
-
-        //Consulto por la esquina
-        if (addressCorner.value === "")
-        {
-            addressCorner.classList.add('is-invalid');
-        }
-
-        // Para prevenir que el formulario se envíe
-        e.preventDefault();
-        ;
-    });
+                    //Si la publicación fue exitosa, devolverá mensaje de éxito,
+                    //de lo contrario, devolverá mensaje de error.
+                    if (resultObj.status === 'ok')
+                    {
+                        msgToShow = resultObj.data.msg;
+                        document.getElementById("buyResult").classList.add('alert-success');
+                    }
+                    else if (resultObj.status === 'error')
+                    {
+                        msgToShow = ERROR_MSG;
+                        document.getElementById("buyResult").classList.add('alert-danger');
+                    }
+        
+                    msgToShowHTML.innerHTML = msgToShow;
+                    document.getElementById("buyResult").classList.add("show");
+                });
+            }
+    
+            //Esto se debe realizar para prevenir que el formulario se envíe (comportamiento por defecto del navegador)
+            if (e.preventDefault) e.preventDefault();
+                return false;
+        });
 });

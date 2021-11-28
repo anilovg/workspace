@@ -35,8 +35,8 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark" id="menu"></nav>
-  
+  <nav id="menu"></nav>
+    
   <div class="container">
     <div class="text-center p-4">
       <h2>Vender</h2>
@@ -50,7 +50,7 @@
             <div class="col-md-6 mb-3">
               <label for="productName">Nombre*</label>
               <input type="text" class="form-control" id="productName" placeholder="Ingresa un nombre" value="">
-              <div class="invalid-feedback"></div>
+              <div class="invalid-feedback">Ingresa un nombre</div>
             </div>
           </div>
           <div class="row">
@@ -95,7 +95,7 @@
                 <option>Computadoras</option>
                 <option>Vestimenta</option>
               </select>
-              <div class="invalid-feedback">Por favor ingresa una categoría válida.</div>
+              <div class="invalid-feedback">Ingresa una categoría válida.</div>
             </div>
           </div>
           <div class="row">
@@ -156,12 +156,7 @@
       </div>
     </div>
   </div>
-  <footer class="text-muted">
-    <div class="container">
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2021</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
+  <br>
 
   <div class="alert fade" role="alert" id="alertResult">
     <span id="resultSpan"></span>
@@ -188,7 +183,7 @@
             </div>
             <hr>
             <div class="row">
-              <h5 class="text-primary">Stándar (7%)</h5>
+              <h5 class="text-primary">Premium (7%)</h5>
               <p class="muted text-justify">Se mostrará el producto en los primeros lugares de resultados de búsqueda,
                 así cómo cuando se ingrese a la categoría que pertenezca.</p>
             </div>
@@ -206,6 +201,9 @@
       </div>
     </div>
   </div>
+
+  <footer id="footer" class="text-muted bg-light"></footer>
+  
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

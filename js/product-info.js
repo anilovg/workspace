@@ -77,7 +77,7 @@ function saveComment() { // Función para guardar nuevo comentario
     let newComment = {
         description: document.getElementById('textarea').value, // Toma el comentario realizado
         dateTime: formatDate, // Muestra la fecha y hora creada anteriormente
-        score: document.getElementById('score').value, // Toma el puntaje del select
+        score: document.getElementsByClassName('rating__star fas fa-star').length, // Toma el puntaje del select
         user: localStorage.getItem('username') // Toma el nombre de usuario del LS
     }
 
