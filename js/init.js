@@ -1,16 +1,16 @@
-const CATEGORIES_URL = "https://japdevdep.github.io/ecommerce-api/category/all.json";
-// const CATEGORIES_URL = "http://localhost:3000/categories"; // Link servidor local
+// const CATEGORIES_URL = "https://japdevdep.github.io/ecommerce-api/category/all.json";
+const CATEGORIES_URL = "http://localhost:3000/categories"; // Link servidor local
 const PUBLISH_PRODUCT_URL = "https://japdevdep.github.io/ecommerce-api/product/publish.json";
 const CATEGORY_INFO_URL = "https://japdevdep.github.io/ecommerce-api/category/1234.json";
-const PRODUCTS_URL = "https://japdevdep.github.io/ecommerce-api/product/all.json";
-// const PRODUCTS_URL = "http://localhost:3000/products"; // Link servidor local
+// const PRODUCTS_URL = "https://japdevdep.github.io/ecommerce-api/product/all.json";
+const PRODUCTS_URL = "http://localhost:3000/products"; // Link servidor local
 const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678.json";
 const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
-const MULTIPLE_CART_URL = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
+// const MULTIPLE_CART_URL = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
     // Link del desafiante, carrito con más de un producto.
-// const MULTIPLE_CART_URL = "http://localhost:3000/cart"; // Link de servidor local
+const MULTIPLE_CART_URL = "http://localhost:3000/cart"; // Link de servidor local
 
 var showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";

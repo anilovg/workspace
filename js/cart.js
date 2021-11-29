@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         var buyForm = document.getElementById("buy-info");
 
         //Se agrega una escucha en el evento 'submit' que será
-        //lanzado por el formulario cuando se seleccione 'Publicar producto'.
+        //lanzado por el formulario cuando se seleccione 'Finalizar compra"
         buyForm.addEventListener("submit", function(e){
     
             let addressName = document.getElementById("addressName");
@@ -146,22 +146,19 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     
             //Se realizan los controles necesarios,
-            //En este caso se controla que se haya ingresado el nombre y categoría.
-            //Consulto por el nombre del producto
+            //En este caso se controla que se haya ingresado la dirección completa (calle, númmero y esquina)
             if (addressName.value === "")
             {
                 addressName.classList.add('is-invalid');
                 infoMissing = true;
             }
             
-            //Consulto por la categoría del producto
             if (addressNumber.value === "")
             {
                 addressNumber.classList.add('is-invalid');
                 infoMissing = true;
             }
 
-            //Consulto por la categoría del producto
             if (addressCorner.value === "")
             {
                 addressCorner.classList.add('is-invalid');
@@ -170,15 +167,13 @@ document.addEventListener("DOMContentLoaded", function(e){
             
             if(!infoMissing)
             {
-                //Aquí ingresa si pasó los controles, irá a enviar
-                //la solicitud para crear la publicación.
+                // Si pasó los controles ingresa, se envía la solicitud para concretar la compra
     
                 getJSONData(CART_BUY_URL).then(function(resultObj){
                     let msgToShowHTML = document.getElementById("buySpan");
                     let msgToShow = "";
         
-                    //Si la publicación fue exitosa, devolverá mensaje de éxito,
-                    //de lo contrario, devolverá mensaje de error.
+                    //Si la compra fue exitosa, devolverá mensaje de éxito
                     if (resultObj.status === 'ok')
                     {
                         msgToShow = resultObj.data.msg;
